@@ -1,0 +1,14 @@
+services:
+#  activemq:
+#    image: cloudesire/activemq
+#    container_name: activemq
+#    ports:
+#      - "61616:61616"
+#      - "8161:8161"
+  rabbitmq:
+    image: pcloud/rabbitmq-stomp
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "61613:61613"
