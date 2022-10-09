@@ -12,3 +12,30 @@ services:
       - "5672:5672"
       - "15672:15672"
       - "61613:61613"
+  postgres:
+    container_name: postgres
+    image: postgres:14.5-alpine
+    environment:
+      POSTGRES_USER: mayur
+      POSTGRES_PASSWORD: mayur123
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge

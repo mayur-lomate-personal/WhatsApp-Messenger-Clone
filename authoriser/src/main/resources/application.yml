@@ -1,7 +1,7 @@
 server:
-  port: 8090
+  port: 8092
 spring:
   application:
-    name: websocket
+    name: authoriser
 jwt:
   secret: mayur

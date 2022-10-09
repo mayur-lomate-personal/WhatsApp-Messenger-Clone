@@ -8,6 +8,9 @@
 <body onload="webSocket.disconnect()">
 <div>
     <div>
+        <input type="text" id="jwt" placeholder="Write token"/>
+    </div>
+    <div>
         <button id="connect" onclick="webSocket.connect();">Connect</button>
         <button id="disconnect" disabled="disabled" onclick="webSocket.disconnect();">
             Disconnect

@@ -7,7 +7,7 @@ class WebSocketController {
 	_onConnected(frame) {
         this.setConnected(true);
         console.log('Connected: ' + frame);
-        this.stompClient.subscribe('/topic/greetings', this.showMessage);
+        this.stompClient.subscribe('/topic/greetings', this.showMessage, {});
 	}
 
 	setConnected(connected) {
@@ -18,14 +18,15 @@ class WebSocketController {
 	}
 
 	connect() {
-	    var socket = new SockJS('/websocket');
+	    var socket = new SockJS('/websocket?jwt=' + document.getElementById('jwt').value);
 	    this.stompClient = Stomp.over(socket);
+	    this.stompClient.heartbeat.outgoing = 0;
 	    this.stompClient.connect({}, this._onConnected);
 	}
 
 	disconnect() {
 	    if(this.stompClient != null) {
-	        this.stompClient.disconnect();
+	        this.stompClient.disconnect(null, {jwt:"ABC"});
 	    }
 	    this.setConnected(false);
 	    console.log("Disconnected");
@@ -33,7 +34,7 @@ class WebSocketController {
 
 	sendMessage() {
 	    var message = document.getElementById('text').value;
-	    this.stompClient.send("/app/hello", {}, message);
+	    this.stompClient.send("/app/hello", {jwt:"ABC"}, message);
 	}
 
 	showMessage(message) {

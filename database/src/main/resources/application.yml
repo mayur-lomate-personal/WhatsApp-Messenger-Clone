@@ -1,0 +1,17 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: databaseoperations
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  datasource:
+    username: 'mayur'
+    url: jdbc:postgresql://localhost:5432/websocket
+    password: 'mayur123'

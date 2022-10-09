@@ -1,4 +1,4 @@
-package com.mayur.websocket;
+package com.mayur.websocket.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 
 @Slf4j
 @Controller
-public class WebSocketService {
+public class WebSocketController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
