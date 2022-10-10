@@ -8,6 +8,7 @@ class WebSocketController {
         this.setConnected(true);
         console.log('Connected: ' + frame);
         this.stompClient.subscribe('/topic/greetings', this.showMessage, {});
+        this.stompClient.subscribe('/user/queue/messages', this.showMessage, {});
 	}
 
 	setConnected(connected) {
@@ -36,6 +37,12 @@ class WebSocketController {
 	    var message = document.getElementById('text').value;
 	    this.stompClient.send("/app/hello", {jwt:"ABC"}, message);
 	}
+
+	sendMessageToUser() {
+    	    var message = document.getElementById('message').value;
+    	    var to = document.getElementById('user').value;
+    	    this.stompClient.send("/app/messages", {jwt:"ABC"}, JSON.stringify({'to':to, 'message':message}));
+    }
 
 	showMessage(message) {
 	    var response = document.getElementById('response');
