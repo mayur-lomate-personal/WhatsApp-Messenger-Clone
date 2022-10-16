@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 
 @FeignClient(
-        value = "localhost:8091"
+        value = "DATABASE-OPERATIONS-SERVER"
 )
 public interface DatabaseClient {
     @PostMapping(path = "/api/user/save", produces = {MediaType.APPLICATION_JSON_VALUE})

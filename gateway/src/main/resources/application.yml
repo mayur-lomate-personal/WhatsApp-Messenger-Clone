@@ -1,13 +1,13 @@
 server:
-  port: 8090
+  port: 9080
 spring:
   application:
-    name: websocket-server
-jwt:
-  secret: mayur
+    name: gateway-server
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
     fetch-registry: true
     register-with-eureka: true
+  instance:
+    prefer-ip-address: true

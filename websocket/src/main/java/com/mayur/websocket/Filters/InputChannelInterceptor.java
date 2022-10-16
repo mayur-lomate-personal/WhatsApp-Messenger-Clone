@@ -23,7 +23,7 @@ public class InputChannelInterceptor implements ChannelInterceptor {
         }
         Principal user = accessor.getUser();
         //log.info(message.getPayload().getClass().getName());
-        log.info("sessAttr " + user.getName());
+        //log.info("sessAttr " + user.getName());
         return message;
     }
 }

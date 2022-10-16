@@ -30,11 +30,6 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private NonAuthenticatedException nonAuthenticatedException;
 
-    @Bean
-    public Client feignClient() {
-        return new Client.Default(null, null);
-    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // TODO Auto-generated method stub
