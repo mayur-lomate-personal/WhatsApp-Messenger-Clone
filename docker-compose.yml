@@ -12,6 +12,8 @@ services:
       - "5672:5672"
       - "15672:15672"
       - "61613:61613"
+    networks:
+      - spring
   postgres:
     container_name: postgres
     image: postgres:14.5-alpine
@@ -35,7 +37,80 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+  eureka-server:
+    image: mayurlomate/websocket-eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE = docker
+    networks:
+      - spring
+    depends_on:
+      - postgres
+      - rabbitmq
+  database-operations-server:
+    image: mayurlomate/websocket-database:latest
+    container_name: database-operations-server
+    ports:
+      - "8091:8091"
+    environment:
+      - SPRING_PROFILES_ACTIVE = docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - postgres
+      - rabbitmq
+      - eureka-server
+  authoriser-server:
+    image: mayurlomate/websocket-authoriser:latest
+    container_name: authoriser-server
+    ports:
+      - "8092:8092"
+    environment:
+      - SPRING_PROFILES_ACTIVE = docker
+    networks:
+      - spring
+    depends_on:
+      - postgres
+      - rabbitmq
+      - eureka-server
+      - database-operations-server
+  websocket-server:
+    image: mayurlomate/websocket-websocket:latest
+    container_name: websocket-server
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_PROFILES_ACTIVE = docker
+    networks:
+      - spring
+    depends_on:
+      - postgres
+      - rabbitmq
+      - eureka-server
+      - database-operations-server
+      - authoriser-server
+  apigateway-server:
+    image: mayurlomate/websocket-gateway:latest
+    container_name: apigateway-server
+    ports:
+      - "9080:9080"
+    environment:
+      - SPRING_PROFILES_ACTIVE = docker
+    networks:
+      - spring
+    depends_on:
+      - postgres
+      - rabbitmq
+      - eureka-server
+      - database-operations-server
+      - authoriser-server
+      - websocket-server
 
 networks:
   postgres:
+    driver: bridge
+  spring:
     driver: bridge

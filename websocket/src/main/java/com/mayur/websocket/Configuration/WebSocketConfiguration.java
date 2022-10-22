@@ -5,6 +5,7 @@ import com.mayur.websocket.Filters.HandShakeInterceptor;
 import com.mayur.websocket.Filters.InputChannelInterceptor;
 import org.apache.commons.codec.binary.Base32;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
@@ -17,11 +18,15 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
+
+    @Value("${broker.hostname}")
+    private String borkerHostname;
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
 
         registry.enableStompBrokerRelay("/topic", "/queue")
-                .setRelayHost("localhost")
+                .setRelayHost(borkerHostname)
                 .setRelayPort(61613)
                 .setSystemLogin("admin")
                 .setSystemPasscode("admin")

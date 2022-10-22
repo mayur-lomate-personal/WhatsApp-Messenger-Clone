@@ -1,0 +1,15 @@
+server:
+  port: 9080
+spring:
+  application:
+    name: gateway-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+broker:
+  hostname: rabbitmq
