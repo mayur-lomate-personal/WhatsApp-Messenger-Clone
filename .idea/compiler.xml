@@ -9,11 +9,13 @@
         <module name="database" />
         <module name="clients" />
         <module name="websocket" />
-        <module name="websocket-test-java" />
         <module name="eureka-server" />
         <module name="authoriser" />
         <module name="gateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="websocket-test-java" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
