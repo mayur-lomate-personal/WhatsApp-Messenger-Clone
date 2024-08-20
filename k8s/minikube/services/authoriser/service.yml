@@ -1,0 +1,13 @@
+# minikube service --url authoriser-server
+apiVersion: v1
+kind: Service
+metadata:
+  name: authoriser-server
+spec:
+  selector:
+    app: authoriser-server
+  ports:
+    - port: 80
+      targetPort: 8092
+      nodePort: 30771
+  type: NodePort

@@ -1,0 +1,13 @@
+# minikube service --url websocket-server
+apiVersion: v1
+kind: Service
+metadata:
+  name: websocket-server
+spec:
+  selector:
+    app: websocket-server
+  ports:
+    - port: 80
+      targetPort: 8090
+      nodePort: 30772
+  type: NodePort

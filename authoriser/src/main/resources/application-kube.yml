@@ -1,0 +1,16 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: authoriser-server
+jwt:
+  secret: mayur
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: false
+broker:
+  hostname: rabbitmq

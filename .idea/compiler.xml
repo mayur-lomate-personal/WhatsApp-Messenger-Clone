@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="database" />
         <module name="clients" />
-        <module name="websocket" />
         <module name="eureka-server" />
+        <module name="websocket" />
         <module name="authoriser" />
         <module name="gateway" />
       </profile>

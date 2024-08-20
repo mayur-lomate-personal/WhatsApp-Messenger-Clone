@@ -1,0 +1,28 @@
+#  kubectl apply -f .\services\database\
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-operations-server
+  labels:
+    app: database-operations-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: database-operations-server
+      labels:
+        app: database-operations-server
+    spec:
+      containers:
+        - name: database-operations-server
+          image: mayurlomate/websocket-database:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8091
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: database-operations-server

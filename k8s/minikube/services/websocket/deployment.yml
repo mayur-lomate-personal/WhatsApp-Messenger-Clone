@@ -1,0 +1,28 @@
+#  kubectl apply -f .\services\websocket\
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-server
+  labels:
+    app: websocket-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: websocket-server
+      labels:
+        app: websocket-server
+    spec:
+      containers:
+        - name: websocket-server
+          image: mayurlomate/websocket-websocket:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8090
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: websocket-server

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-operations-server
+spec:
+  selector:
+    app: database-operations-server
+  ports:
+    - port: 80
+      targetPort: 8091
+  type: LoadBalancer

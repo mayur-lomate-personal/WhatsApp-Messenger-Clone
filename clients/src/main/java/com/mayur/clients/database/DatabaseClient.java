@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 
 @FeignClient(
-        value = "DATABASE-OPERATIONS-SERVER"
+        name = "DATABASE-OPERATIONS-SERVER",
+        url = "${clients.database-operations-server.url}"
 )
 public interface DatabaseClient {
     @PostMapping(path = "/api/user/save", produces = {MediaType.APPLICATION_JSON_VALUE})

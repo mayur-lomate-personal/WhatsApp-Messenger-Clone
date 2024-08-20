@@ -1,0 +1,16 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: websocket-server
+jwt:
+  secret: mayur
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: false
+broker:
+  hostname: rabbitmq

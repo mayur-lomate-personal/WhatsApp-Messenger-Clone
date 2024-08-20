@@ -20,6 +20,7 @@ services:
     environment:
       POSTGRES_USER: mayur
       POSTGRES_PASSWORD: mayur123
+      POSTGRES_DB: websocket
     ports:
       - "5432:5432"
     networks:

@@ -1,0 +1,28 @@
+# minikube service --url rabbitmq
+# create admin and give all permissions
+kind: Service
+apiVersion: v1
+metadata:
+  name: rabbitmq
+  labels:
+    app: rabbitmq
+    type: LoadBalancer
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      protocol: TCP
+      port: 15672
+      targetPort: 15672
+      nodePort: 31672
+    - name: amqp
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+      nodePort: 30672
+    - name: stomp
+      protocol: TCP
+      port: 61613
+      targetPort: 61613
+  selector:
+    app: rabbitmq
