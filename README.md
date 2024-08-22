@@ -10,17 +10,37 @@
 
 ## Run
 
+- Docker
 ```docker
 docker compose up -id
+```
+- minikube
+```minikube
+(open terminal and be at path of minikube folder)
+kubectl apply -f .\bootstrap\postgres\
+kubectl apply -f .\bootstrap\rabbitmq\
+minikube service --url rabbitmq
+(create admin user in rabbitmq and give all permissions)
+kubectl apply -f .\services\database\
+kubectl apply -f .\services\authoriser\
+kubectl apply -f .\services\websocket\
+minikube service --url authoriser-server
+minikube service --url websocket-server
 ```
 
 ## APIs
 
-POST localhost:9080/api/register/user :- To create new user
-
-POST localhost:9080/api/jwt :- To get jwt token
-
-GET localhost:9080/api/websocket/session :- to get session token valid for 30 seconds, used for websocket. 
-
+```http
+POST [gateway-url]:[gateway-port]/api/register/user :- To create new user
+```
+```http
+POST [gateway-url]:[gateway-port]/api/jwt :- To get jwt token
+```
+```http
+GET [gateway-url]:[gateway-port]/api/websocket/session :- to get session token valid for 30 seconds, used for websocket.
+```
 ## System Design
 ![websocket-system-design](https://user-images.githubusercontent.com/77961230/197375506-368fdc6a-5d72-4141-aa7a-e832c400ae36.jpg)
+
+## System Design(Kubernetes)
+![kubernetes-websocket-system-design](./k8s/messanger-based-on-websocket-kubernetes.drawio.png)
